@@ -39,7 +39,7 @@ const App = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/predict", formData);
+      const response = await axios.post("https://amount-api.onrender.com/predict", formData);
       setPredictionText(response.data.prediction_text);
     } catch (error) {
       console.error("There was an error submitting the form", error);
