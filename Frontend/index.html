@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Prediction</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 40%;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(to right, #ffffff, #e0eafc);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            position: relative;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 1.2em;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="number"], 
+        select, 
+        input[type="submit"] {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #ff7e5f;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
+        }
+
+        input[type="submit"] {
+            background-color: #ff7e5f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff4f70;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #28a745;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        select, input[type="number"] {
+            background-color: #f0f0f0;
+        }
+
+        form input, form select {
+            margin-top: 5px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(to right, #fcb69f, #ffecd2);
+            z-index: -1;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Transaction Prediction</h2>
+        <form method="post">
+            <div class="form-row">
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <label for="age">Age:</label>
+                <input type="number" name="age" id="age" required>
+            </div>
+
+            <label for="transaction_amount">Transaction Amount:</label>
+            <input type="number" name="transaction_amount" id="transaction_amount" step="0.01" required><br>
+
+            <label for="transaction_month">Transaction Month:</label>
+            <select name="transaction_month" id="transaction_month" required>
+                {% for key, value in mondict.items() %}
+                    <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="transaction_day">Transaction Day:</label>
+            <select name="transaction_day" id="transaction_day" required>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select><br>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction_text %}
+            <h3>{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
