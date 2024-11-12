@@ -4,7 +4,7 @@ import pickle
 import pandas as pd
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://amount-wheat.vercel.app"}}) # Enable CORS
+CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}) # Enable CORS
 
 # Load the model and feature names from the pickle file
 with open('model.pkl', 'rb') as model_file:

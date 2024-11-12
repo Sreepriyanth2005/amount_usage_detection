@@ -29,6 +29,8 @@ const App = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Update formData with a controlled value
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -39,7 +41,7 @@ const App = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://amount-api.onrender.com/predict", formData);
+      const response = await axios.post("http://127.0.0.1:5000/predict", formData);
       setPredictionText(response.data.prediction_text);
     } catch (error) {
       console.error("There was an error submitting the form", error);
@@ -73,6 +75,7 @@ const App = () => {
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded-md"
               required
+              placeholder="Enter age"
             />
           </div>
         </div>
@@ -87,6 +90,7 @@ const App = () => {
             step="0.01"
             className="w-full p-3 border border-gray-300 rounded-md"
             required
+            placeholder="Enter amount"
           />
         </div>
 
@@ -99,8 +103,9 @@ const App = () => {
             className="w-full p-3 border border-gray-300 rounded-md"
             required
           >
+            <option value="">Select a month</option>
             {Object.entries(mondict).map(([key, value]) => (
-              <option key={key} value={value}>
+              <option key={key} value={key}>
                 {value}
               </option>
             ))}
@@ -116,6 +121,7 @@ const App = () => {
             className="w-full p-3 border border-gray-300 rounded-md"
             required
           >
+            <option value="">Select a day</option>
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
             <option value="Wednesday">Wednesday</option>
